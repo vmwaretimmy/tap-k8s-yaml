@@ -30,6 +30,7 @@ spec:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.1
         conventions.carto.run/applied-conventions: |-
+          sample/add-env-var
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
@@ -54,6 +55,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: CONVENTION_SERVER
+          value: HELLO FROM CONVENTION
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
         image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app2-tap-dev@sha256:97e0319bf7132311c041b2137211db6c850492729b645089d4c193eef3b260f2
