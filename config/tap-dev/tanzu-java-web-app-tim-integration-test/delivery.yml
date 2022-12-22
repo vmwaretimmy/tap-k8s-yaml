@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tanzu-java-web-app-tim-integration-test
+  annotations:
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+  labels:
+    app.kubernetes.io/part-of: tanzu-java-web-app-tim-integration-test
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
+    apps.tanzu.vmware.com/workload-type: server
+    app.kubernetes.io/component: run
+    carto.run/workload-name: tanzu-java-web-app-tim-integration-test
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: run
+      app.kubernetes.io/part-of: tanzu-java-web-app-tim-integration-test
+      apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/int-tests: "true"
+      apps.tanzu.vmware.com/workload-type: server
+      carto.run/workload-name: tanzu-java-web-app-tim-integration-test
+      conventions.apps.tanzu.vmware.com/framework: spring-boot
+      tanzu.app.live.view: "true"
+      tanzu.app.live.view.application.actuator.port: "8081"
+      tanzu.app.live.view.application.flavours: spring-boot
+      tanzu.app.live.view.application.name: tanzu-java-web-app-tim-integration-test
+  template:
+    metadata:
+      annotations:
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 2.7.4
+        conventions.carto.run/applied-conventions: |-
+          sample/add-env-var
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
+          appliveview-sample/app-live-view-appflavour-check
+          appliveview-sample/app-live-view-connector-boot
+          appliveview-sample/app-live-view-appflavours-boot
+          appliveview-sample/app-live-view-systemproperties
+        developer.conventions/target-containers: workload
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: tanzu-java-web-app-tim-integration-test
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/int-tests: "true"
+        apps.tanzu.vmware.com/workload-type: server
+        carto.run/workload-name: tanzu-java-web-app-tim-integration-test
+        conventions.apps.tanzu.vmware.com/framework: spring-boot
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: tanzu-java-web-app-tim-integration-test
+    spec:
+      containers:
+      - env:
+        - name: CONVENTION_SERVER
+          value: HELLO FROM CONVENTION
+        - name: JAVA_TOOL_OPTIONS
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-integration-test-tap-dev@sha256:c12cf19c17f5dee24a6e28349175915e759f18b34fda8876851cd8e355349f4f
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tanzu-java-web-app-tim-integration-test
+  labels:
+    app.kubernetes.io/part-of: tanzu-java-web-app-tim-integration-test
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
+    apps.tanzu.vmware.com/workload-type: server
+    app.kubernetes.io/component: run
+    carto.run/workload-name: tanzu-java-web-app-tim-integration-test
+spec:
+  selector:
+    app.kubernetes.io/component: run
+    app.kubernetes.io/part-of: tanzu-java-web-app-tim-integration-test
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
+    apps.tanzu.vmware.com/workload-type: server
+    carto.run/workload-name: tanzu-java-web-app-tim-integration-test
+    conventions.apps.tanzu.vmware.com/framework: spring-boot
+    tanzu.app.live.view: "true"
+    tanzu.app.live.view.application.actuator.port: "8081"
+    tanzu.app.live.view.application.flavours: spring-boot
+    tanzu.app.live.view.application.name: tanzu-java-web-app-tim-integration-test
+  ports:
+  - targetPort: 8080
+    port: 8080
+    name: http
+
