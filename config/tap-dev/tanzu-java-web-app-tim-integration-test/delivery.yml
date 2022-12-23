@@ -62,7 +62,7 @@ spec:
           value: HELLO FROM CONVENTION
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-integration-test-tap-dev@sha256:c12cf19c17f5dee24a6e28349175915e759f18b34fda8876851cd8e355349f4f
+        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-integration-test-tap-dev@sha256:f517223fda0d37ea2a0b7060357f18ac744bd0ef9c7d2acf7029c6bdf4ac36d1
         livenessProbe:
           httpGet:
             path: /livez
