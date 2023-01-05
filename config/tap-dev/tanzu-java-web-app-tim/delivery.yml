@@ -30,7 +30,6 @@ spec:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.4
         conventions.carto.run/applied-conventions: |-
-          sample/add-env-var
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
@@ -55,11 +54,9 @@ spec:
     spec:
       containers:
       - env:
-        - name: CONVENTION_SERVER
-          value: HELLO FROM CONVENTION
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-tap-dev@sha256:8a5f07b45ec632dd8fb4066ee07e012dba9690145f3da1acc287bab25835da0b
+        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-tap-dev@sha256:8d2dd6cff59c74db6e63df95f26b5af73cab5d8ae936de7e533e68895407d41a
         livenessProbe:
           httpGet:
             path: /livez
