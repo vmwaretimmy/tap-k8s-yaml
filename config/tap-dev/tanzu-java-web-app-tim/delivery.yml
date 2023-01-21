@@ -8,6 +8,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: tanzu-java-web-app-tim
     apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: tanzu-java-web-app-tim
@@ -17,6 +18,7 @@ spec:
       app.kubernetes.io/component: run
       app.kubernetes.io/part-of: tanzu-java-web-app-tim
       apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/int-tests: "true"
       apps.tanzu.vmware.com/workload-type: server
       carto.run/workload-name: tanzu-java-web-app-tim
       conventions.apps.tanzu.vmware.com/framework: spring-boot
@@ -45,6 +47,7 @@ spec:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: tanzu-java-web-app-tim
         apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/int-tests: "true"
         apps.tanzu.vmware.com/workload-type: server
         carto.run/workload-name: tanzu-java-web-app-tim
         conventions.apps.tanzu.vmware.com/framework: spring-boot
@@ -59,7 +62,7 @@ spec:
           value: HELLO FROM CONVENTION
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-tap-dev@sha256:8a5f07b45ec632dd8fb4066ee07e012dba9690145f3da1acc287bab25835da0b
+        image: harbor.lab.tw/timmy-tap1.3-ootb/ootb-supply-chain/tanzu-java-web-app-tim-tap-dev@sha256:b19072e13af9cf88f01a9e7783d3b14ddd292295b773ec1f2481aeab33af0a6c
         livenessProbe:
           httpGet:
             path: /livez
@@ -86,6 +89,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: tanzu-java-web-app-tim
     apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: tanzu-java-web-app-tim
@@ -94,6 +98,7 @@ spec:
     app.kubernetes.io/component: run
     app.kubernetes.io/part-of: tanzu-java-web-app-tim
     apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/int-tests: "true"
     apps.tanzu.vmware.com/workload-type: server
     carto.run/workload-name: tanzu-java-web-app-tim
     conventions.apps.tanzu.vmware.com/framework: spring-boot
